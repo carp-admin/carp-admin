@@ -34,6 +34,8 @@ import * as bcrypt from 'bcrypt';
 import { Public } from '../decorator/public.decorator';
 import configuration from '../config/configuration';
 import { ApiPaginate } from '../decorator/api.paginate.descorator';
+import { DepartmentService } from '../department/department.service';
+import { Department } from '../department/entities/department.entity';
 
 @ApiTags('admin')
 @ApiBearerAuth()
@@ -42,6 +44,7 @@ import { ApiPaginate } from '../decorator/api.paginate.descorator';
 export class AdminController {
   constructor(
     private readonly adminService: AdminService,
+    private readonly departmentService: DepartmentService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -195,6 +198,13 @@ export class AdminController {
     example: '15701308875',
     required: false,
   })
+  @ApiQuery({
+    name: 'departmentId',
+    description: '部门id',
+    example: [],
+    type: [String],
+    required: false,
+  })
   @Get()
   async findAll(
     @Query('current', new DefaultValuePipe(1), ParseIntPipe) current: number,
@@ -204,9 +214,20 @@ export class AdminController {
     @Query('mobile') mobile: string,
     @Query('qq') qq: string,
     @Query('wechat') wechat: string,
+    @Query('departmentId') departmentId: string,
     @Query('startDate') startDate: string,
     @Query('endDate') endDate: string,
   ) {
+    const departmentIds: string[] = [];
+    if (departmentId) {
+      const departmentList = await this.departmentService.findDescendantsTree(
+        departmentId,
+      );
+      departmentIds.push(
+        ...this.flatTree(departmentList.children),
+        departmentId,
+      );
+    }
     const [adminList, total] = await this.adminService.findAll(
       current,
       pageSize,
@@ -215,12 +236,22 @@ export class AdminController {
       mobile,
       qq,
       wechat,
+      departmentIds,
       startDate,
       endDate,
     );
     return pagination(adminList, total, current, pageSize);
   }
-
+  flatTree(tree: Department[]) {
+    const tmp: string[] = [];
+    for (const t of tree) {
+      tmp.push(t.id);
+      if (t.children && t.children.length > 0) {
+        tmp.push(...this.flatTree(t.children));
+      }
+    }
+    return tmp;
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.adminService.findOne(id);

@@ -43,14 +43,16 @@ export class AdminService {
     mobile = '',
     qq = '',
     wechat = '',
+    departmentIds = [],
     startDate = '',
     endDate = '',
   ) {
     return this.adminRepository
-      .createQueryBuilder()
+      .createQueryBuilder('admin')
+      .leftJoinAndSelect('admin.department', 'department')
       .offset((current - 1) * pageSize)
       .limit(pageSize)
-      .orderBy('id', 'DESC')
+      .orderBy('admin.id', 'DESC')
       .where(
         new Brackets((q) => {
           if (username) {
@@ -83,6 +85,15 @@ export class AdminService {
         new Brackets((q) => {
           if (wechat) {
             q.where('wechat like :wechat', { wechat: `%${wechat}%` });
+          }
+        }),
+      )
+      .andWhere(
+        new Brackets((q) => {
+          if (departmentIds.length > 0) {
+            q.where('admin.departmentId in (:...departmentIds)', {
+              departmentIds,
+            });
           }
         }),
       )

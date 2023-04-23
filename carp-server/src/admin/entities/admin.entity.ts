@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Department } from '../../department/entities/department.entity';
 
 @Entity()
 export class Admin {
@@ -71,6 +73,13 @@ export class Admin {
   })
   @Column({ nullable: true })
   remark: string;
+
+  @ApiProperty({
+    description: '部门',
+    required: false,
+  })
+  @ManyToOne(() => Department, (department) => department.adminList)
+  department: Department;
 
   @ApiProperty({
     description: '创建时间',

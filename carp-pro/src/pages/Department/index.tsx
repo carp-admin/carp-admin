@@ -36,7 +36,7 @@ export default () => {
       valueType: 'dateTime',
     },
     {
-      title: '创建时间',
+      title: '操作',
       valueType: 'option',
       width: 100,
       render: (_, record) => [

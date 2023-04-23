@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Relation,
   Tree,
@@ -11,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty, IntersectionType } from '@nestjs/swagger';
+import { Admin } from '../../admin/entities/admin.entity';
 
 @Entity()
 @Tree('materialized-path')
@@ -48,6 +50,12 @@ export class Department {
 
   @Column({ nullable: true })
   parentId: string;
+
+  @ApiProperty({
+    description: '账号列表',
+  })
+  @OneToMany(() => Admin, (admin) => admin.department)
+  adminList: Admin[];
 
   @ApiProperty({
     description: '创建时间',

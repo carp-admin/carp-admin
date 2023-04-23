@@ -16,10 +16,15 @@ export class DepartmentService {
     return this.departmentRepository.save(createDepartmentDto);
   }
 
-  async findTree() {
+  findTree() {
     return this.departmentRepository.manager
       .getTreeRepository(Department)
       .findTrees();
+  }
+  findDescendantsTree(departmentId: string) {
+    return this.departmentRepository.manager
+      .getTreeRepository(Department)
+      .findDescendantsTree({ id: departmentId } as Department);
   }
   findOne(id: string) {
     return this.departmentRepository.findOne({ where: { id } });
