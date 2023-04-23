@@ -1,0 +1,14 @@
+{
+  "name": "carp-admin",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start:server": "pnpm run -C carp-server start:dev",
+    "start:pro": "pnpm run -C carp-pro start",
+    "openapi": "pnpm run -C carp-pro openapi"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
