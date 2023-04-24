@@ -22,7 +22,7 @@ export class Department {
   id: string;
 
   @ApiProperty({ description: '部门名称' })
-  @Column({ comment: '部门名称' })
+  @Column({ comment: '部门名称', nullable: true })
   name: string;
 
   @ApiProperty({ description: '部门状态：1可用；0禁用' })

@@ -21,7 +21,7 @@ export class Admin {
   @ApiProperty({
     description: '用户名',
   })
-  @Column()
+  @Column({ nullable: true })
   username: string;
 
   @ApiProperty({
@@ -64,7 +64,7 @@ export class Admin {
     description: '密码',
     required: false,
   })
-  @Column({ select: false })
+  @Column({ select: false, nullable: true })
   password: string;
 
   @ApiProperty({
