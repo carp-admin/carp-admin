@@ -4,8 +4,11 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start:server": "pnpm run -C carp-server start:dev",
+    "dev:server": "pnpm run -C carp-server start:dev",
+    "build:server": "pnpm run -C carp-server build",
+    "start:server": "pnpm run -C carp-server start",
     "start:pro": "pnpm run -C carp-pro start",
+    "build:pro": "pnpm run -C carp-pro build",
     "openapi": "pnpm run -C carp-pro openapi"
   },
   "keywords": [],

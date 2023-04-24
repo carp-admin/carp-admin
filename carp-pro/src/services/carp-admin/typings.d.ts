@@ -18,6 +18,8 @@ declare namespace API {
     password?: string;
     /** 备注 */
     remark?: string;
+    /** 部门 */
+    department?: Department;
     /** 创建时间 */
     createdAt: string;
     /** 更新时间 */
@@ -77,6 +79,8 @@ declare namespace API {
     parent: IntersectionDepartment;
     /** 子分类 */
     children: IntersectionDepartment[];
+    /** 账号列表 */
+    adminList: string[];
     /** 创建时间 */
     createdAt: string;
     /** 更新时间 */
@@ -104,6 +108,8 @@ declare namespace API {
     qq?: string;
     /** 微信 */
     wechat?: string;
+    /** 部门id */
+    departmentId?: string[];
     /** 开始时间:YYYY-MM-DD HH:mm:SS */
     startDate?: string;
     /** 结束时间:YYYY-MM-DD HH:mm:SS */
@@ -123,6 +129,8 @@ declare namespace API {
     parent: IntersectionDepartment;
     /** 子分类 */
     children: IntersectionDepartment[];
+    /** 账号列表 */
+    adminList: string[];
     /** 创建时间 */
     createdAt: string;
     /** 更新时间 */

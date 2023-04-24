@@ -2,7 +2,6 @@ import { Controller, Get } from '@nestjs/common';
 import { AdminService } from './admin/admin.service';
 import { ApiMapResponse } from './decorator/api.map.response';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import * as bcrypt from 'bcrypt';
 import { faker } from '@faker-js/faker';
 import { success } from './utils/response';
 import { Public } from './decorator/public.decorator';
@@ -32,13 +31,12 @@ export class AppController {
   async initAdmin() {
     const saltOrRounds = 10;
     const password = '1355081829@qq.com';
-    const hash = await bcrypt.hash(password, saltOrRounds);
     for (let i = 0; i < 50; i++) {
       const admin = {
-        username: faker.internet.userName(),
+        username: 'carp-admin',
         mobile: faker.phone.number('157########'),
         email: faker.internet.email(),
-        password: hash,
+        password: 'carp-admin',
         qq: faker.datatype.number({ min: 1000000 }),
         wechat: faker.lorem.word(),
       };

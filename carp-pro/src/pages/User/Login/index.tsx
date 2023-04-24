@@ -152,7 +152,7 @@ const Login: React.FC = () => {
           initialValues={{
             autoLogin: true,
             username: 'carp-admin',
-            password: '1355081829@qq.com',
+            password: 'carp-admin',
           }}
           actions={[
             <FormattedMessage

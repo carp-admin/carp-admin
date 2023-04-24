@@ -10,9 +10,14 @@ import configuration from './config/configuration';
 import { JwtAuthGuard } from './guard/auth/jwt-auth.guard';
 import { JwtStrategy } from './guard/auth/jwt.strategy';
 import { DepartmentModule } from './department/department.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
