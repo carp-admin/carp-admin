@@ -63,18 +63,18 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     waterMarkProps: {
       content: initialState?.currentUser?.username,
     },
-    menuItemRender: (item, dom) => (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-        }}
-      >
-        {item.path !== '/welcome' && item.icon}
-        {dom}
-      </div>
-    ),
+    // menuItemRender: (item, dom) => (
+    //   <div
+    //     style={{
+    //       display: 'flex',
+    //       alignItems: 'center',
+    //       gap: 8,
+    //     }}
+    //   >
+    //     {item.path !== '/welcome' && item.icon}
+    //     {dom}
+    //   </div>
+    // ),
     footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;

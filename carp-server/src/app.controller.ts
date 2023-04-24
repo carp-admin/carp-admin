@@ -57,7 +57,7 @@ export class AppController {
       a1.name = area;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      await this.departmentService.create(a1);
+      await this.departmentService.save(a1);
       const departments = ['研发部', '市场部', '商务部', '财务部'];
       for (const department of departments) {
         const a2 = new Department();
@@ -65,7 +65,7 @@ export class AppController {
         a2.parent = a1;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        await this.departmentService.create(a2);
+        await this.departmentService.save(a2);
       }
     }
   }
