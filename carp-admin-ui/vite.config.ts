@@ -24,6 +24,11 @@ export default defineApplicationConfig({
           // only https
           // secure: false
         },
+        '/admin': {
+          target: 'http://localhost:3001',
+          changeOrigin: true,
+          ws: true,
+        },
         '/upload': {
           target: 'http://localhost:3300/upload',
           changeOrigin: true,
